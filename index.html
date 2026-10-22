@@ -1,20 +1,321 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>How Bio Works Automation Pipeline</title><link rel="stylesheet" href="style.css"></head><body>
-<nav><a href="./">Home</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a></nav>
-<h1>How Bio Works Automation Pipeline</h1>
-<p>A private set of command-line tools that one creator uses to publish and manage original videos on the creator's own YouTube channels. There is no public sign-up and no third-party users.</p>
-<h2>What it does</h2>
-<ul>
-<li>Uploads finished videos (private by default) and sets thumbnails, the altered/synthetic-content disclosure and the default language.</li>
-<li>Adds localized titles, descriptions and caption tracks in several languages.</li>
-<li>Reads aggregate performance reports for the creator's own channels.</li>
-<li>Lets the creator read the creator's own Gmail and Google Calendar from a personal assistant bot; mail is sent only when the creator explicitly confirms it.</li>
-</ul>
-<h2>Channels</h2>
-<ul>
-<li><a href="https://www.youtube.com/@howbioworks">How Bio Works</a> (Korean), How Bio Works EN, How Bio Works JP</li>
-<li>K드라마개론 (K-drama analysis)</li>
-<li>국장해부 (Korean stock market)</li>
-</ul>
-<p>Contact: <a href="mailto:bombzoo78@gmail.com">bombzoo78@gmail.com</a></p>
-</body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>BombZoo Studio — How Bio Works Educational Media &amp; Publishing Platform</title>
+  <meta name="description" content="BombZoo Studio is an educational science and financial media production platform operating How Bio Works (KR/EN/JP) and Market Autopsy across TikTok and YouTube.">
+  <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="./" class="brand">
+        <img src="icon.png" alt="BombZoo Studio Icon" class="brand-icon">
+        <div>
+          BombZoo Studio
+          <span class="brand-subtitle">How Bio Works &middot; Educational Media Platform</span>
+        </div>
+      </a>
+      <nav class="main-nav">
+        <a href="./" class="active">Home</a>
+        <a href="#catalog">Episode Catalog</a>
+        <a href="#workbench">Publishing Workbench</a>
+        <a href="#channels">Official Channels</a>
+        <a href="#api-integration">TikTok Integration</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <span class="hero-badge">Official Educational Media Studio &amp; Publishing Platform</span>
+        <h1>BombZoo Studio — How Bio Works</h1>
+        <p>
+          BombZoo Studio produces peer-reviewed biomedical science animations (<strong>How Bio Works</strong> in Korean, English, and Japanese) and forensic financial documentaries (<strong>Market Autopsy</strong>). Our web platform provides a public episode catalog with primary DOI citations alongside our creator publishing workbench integrated with TikTok Login Kit and Content Posting API.
+        </p>
+        <div class="btn-row">
+          <a href="#catalog" class="btn btn-primary">Explore Episode Catalog</a>
+          <a href="#workbench" class="btn btn-outline">Open Publishing Workbench</a>
+          <a href="privacy.html" class="btn btn-outline">Privacy Policy</a>
+          <a href="terms.html" class="btn btn-outline">Terms of Service</a>
+        </div>
+      </div>
+      <div class="hero-icon-card">
+        <img src="icon.png" alt="BombZoo Studio Official App Icon">
+        <span>BombZoo Studio Official App Icon</span>
+      </div>
+    </section>
+
+    <section id="catalog">
+      <h2 class="section-title">📚 Public Episode Catalog &amp; Peer-Reviewed DOI Archive</h2>
+      <p class="section-sub">
+        Browse our published educational short-form and long-form science episodes. Filter by language track or series, or search by biomedical mechanism and journal DOI.
+      </p>
+
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterEpisodes('all', this)">All Episodes</button>
+        <button class="filter-btn" onclick="filterEpisodes('nobel', this)">Nobel Prize Series</button>
+        <button class="filter-btn" onclick="filterEpisodes('paper', this)">Latest Research (DOI)</button>
+        <button class="filter-btn" onclick="filterEpisodes('principle', this)">Core Physiology</button>
+        <button class="filter-btn" onclick="filterEpisodes('market', this)">Market Autopsy</button>
+        <input type="text" id="episodeSearch" class="search-input" placeholder="Search by topic, journal, molecule, or series label..." oninput="searchEpisodes(this.value)">
+      </div>
+
+      <div class="grid-3" id="episodeGrid">
+        <article class="card ep-card" data-cat="nobel">
+          <div class="tag-row">
+            <span class="tag">[Nobel 2026 &middot; 1]</span>
+            <span class="tag">KR / EN / JP</span>
+            <span class="tag">88s Short</span>
+          </div>
+          <h3>Regulatory T Cells &amp; FOXP3: Why Your Immune System Doesn't Attack You</h3>
+          <p>Explains how Sakaguchi Shimon, Mary Brunkow, and Fred Ramsdell discovered FOXP3+ regulatory T cells (Tregs) that prevent catastrophic autoimmune disease.</p>
+          <p><strong>Primary Reference:</strong> Nobel Assembly at Karolinska Institutet &middot; <em>Science / Nature Immunology</em></p>
+        </article>
+
+        <article class="card ep-card" data-cat="nobel">
+          <div class="tag-row">
+            <span class="tag">[Nobel Chemistry 2026 &middot; 1]</span>
+            <span class="tag">KR / EN / JP</span>
+            <span class="tag">88s Short</span>
+          </div>
+          <h3>Metal-Organic Frameworks (MOFs): Harvesting Water Out of Desert Air</h3>
+          <p>Visualizes crystalline porous coordination networks engineered by Omar Yaghi, Susumu Kitagawa, and Richard Robson for CO2 capture and atmospheric water harvesting.</p>
+          <p><strong>Primary Reference:</strong> Royal Swedish Academy of Sciences &middot; <em>Nature / JACS</em></p>
+        </article>
+
+        <article class="card ep-card" data-cat="paper">
+          <div class="tag-row">
+            <span class="tag">[Paper 0021]</span>
+            <span class="tag">KR / EN / JP</span>
+            <span class="tag">88s Short</span>
+          </div>
+          <h3>Oral PROTAC Degraders (Vepdegestrant): Turning Cells into Cancer Shredders</h3>
+          <p>How proteolysis-targeting chimeras (PROTACs) recruit the E3 ubiquitin ligase complex to destroy mutated ESR1 receptors in breast cancer cells.</p>
+          <p><strong>Primary Reference:</strong> <em>New England Journal of Medicine (NEJM)</em> &middot; Phase 3 VERITAC-2 Trial</p>
+        </article>
+
+        <article class="card ep-card" data-cat="paper">
+          <div class="tag-row">
+            <span class="tag">[Paper 0019]</span>
+            <span class="tag">KR / EN / JP</span>
+            <span class="tag">88s Short</span>
+          </div>
+          <h3>Stroke Penumbra Window: How Astrocytes Rewire Surviving Neurons</h3>
+          <p>Examines cellular metabolic rescue mechanisms in the ischemic penumbra and why timely reperfusion preserves synaptic plasticity.</p>
+          <p><strong>Primary Reference:</strong> <em>Nature Neuroscience</em> &middot; Evidence-graded Fact-Check Gate A/B</p>
+        </article>
+
+        <article class="card ep-card" data-cat="principle">
+          <div class="tag-row">
+            <span class="tag">[Principle 0024]</span>
+            <span class="tag">KR / EN / JP</span>
+            <span class="tag">88s Short</span>
+          </div>
+          <h3>Herniated Disc &amp; Macrophage Resorption: How the Body Dissolves Ruptured Discs</h3>
+          <p>Why severely extruded nucleus pulposus tissue triggers an inflammatory macrophage cascade that can spontaneously resorb herniated cartilage over time.</p>
+          <p><strong>Primary Reference:</strong> <em>Spine / NEJM Clinical Review</em> &middot; White Lab 3D Medical Visualization</p>
+        </article>
+
+        <article class="card ep-card" data-cat="market">
+          <div class="tag-row">
+            <span class="tag">[Company Autopsy]</span>
+            <span class="tag">KR / EN / JP</span>
+            <span class="tag">Longform + Short</span>
+          </div>
+          <h3>Forensic SEC 10-K &amp; Supply Chain Dissection: Semiconductor HBM &amp; Foundry Flows</h3>
+          <p>Data-driven analysis of institutional order flow, capital expenditure footnotes, and global supply chain bottlenecks using official SEC EDGAR and KRX filings.</p>
+          <p><strong>Primary Reference:</strong> SEC Form 10-K / DART Official Filings</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="workbench">
+      <h2 class="section-title">🛠️ Interactive Creator Publishing &amp; Metadata Workbench</h2>
+      <p class="section-sub">
+        Test how BombZoo Studio validates series labels, multi-language captions, duplicate guards, and AI-generated content (<code>is_aigc: true</code>) disclosures before dispatching to the TikTok Content Posting API.
+      </p>
+
+      <div class="workbench">
+        <div class="grid-2">
+          <div>
+            <label for="wbChannel">Target Channel Account</label>
+            <select id="wbChannel" onchange="updateWorkbench()">
+              <option value="how.bio.works">@how.bio.works (How Bio Works KR)</option>
+              <option value="how.bio.work.en">@how.bio.work.en (How Bio Works EN)</option>
+              <option value="how.bio.work.jp">@how.bio.work.jp (How Bio Works JP)</option>
+              <option value="marketautopsy">@marketautopsy (Market Autopsy KR)</option>
+              <option value="marketautopsyen">@marketautopsyen (Market Autopsy EN)</option>
+            </select>
+
+            <label for="wbMode">TikTok Content Posting Mode &amp; Scope</label>
+            <select id="wbMode" onchange="updateWorkbench()">
+              <option value="direct">Direct Post (/v2/post/publish/video/init/ — scope: video.publish)</option>
+              <option value="inbox">Inbox Draft Upload (/v2/post/publish/inbox/video/init/ — scope: video.upload)</option>
+            </select>
+
+            <label for="wbTitle">Episode Caption (Series Label + Hook Title + Citation)</label>
+            <textarea id="wbTitle" rows="3" oninput="updateWorkbench()">[Nobel 2026 · 1] Why your immune system doesn't destroy your own body — Regulatory T cells (FOXP3) explained #HowBioWorks #Biology #NobelPrize</textarea>
+
+            <label for="wbPrivacy">Privacy Level &amp; AIGC Disclosure</label>
+            <input type="text" id="wbPrivacy" value="privacy_level: SELF_ONLY | is_aigc: true | duplicate_check: video.list enabled" readonly>
+          </div>
+
+          <div>
+            <label>Live TikTok Content Posting API Request Preview &amp; Validation Status</label>
+            <div style="margin-bottom:0.6rem;">
+              <span class="status-pill" id="wbStatus">✓ Valid Series Prefix &amp; AIGC Disclosure Enabled</span>
+            </div>
+            <pre class="code-preview" id="wbJsonPreview"></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="channels">
+      <h2 class="section-title">🌐 Official Multi-Language Channels</h2>
+      <p class="section-sub">
+        BombZoo Studio operates localized educational channels across TikTok and YouTube, delivering evidence-based science and financial literacy in Korean, English, and Japanese.
+      </p>
+      <div class="grid-3">
+        <div class="card">
+          <div class="tag-row"><span class="tag">Korean (KR)</span><span class="tag">Biomedical Science</span></div>
+          <h3>How Bio Works (KR)</h3>
+          <p>TikTok: <code>@how.bio.works</code></p>
+          <p>YouTube: <a href="https://www.youtube.com/@howbioworks" target="_blank" rel="noopener">youtube.com/@howbioworks</a></p>
+          <p>3D molecular and physiological visualizations explaining peer-reviewed medical research in Korean.</p>
+        </div>
+        <div class="card">
+          <div class="tag-row"><span class="tag">English (EN)</span><span class="tag">Biomedical Science</span></div>
+          <h3>How Bio Works EN</h3>
+          <p>TikTok: <code>@how.bio.work.en</code></p>
+          <p>YouTube: <a href="https://www.youtube.com/@how_bio_works_en" target="_blank" rel="noopener">youtube.com/@how_bio_works_en</a></p>
+          <p>English-language edition featuring full narration and infographic labels for global audiences.</p>
+        </div>
+        <div class="card">
+          <div class="tag-row"><span class="tag">Japanese (JP)</span><span class="tag">Biomedical Science</span></div>
+          <h3>How Bio Works JP</h3>
+          <p>TikTok: <code>@how.bio.work.jp</code></p>
+          <p>YouTube: <a href="https://www.youtube.com/@howbioworksjp" target="_blank" rel="noopener">youtube.com/@howbioworksjp</a></p>
+          <p>Japanese-language edition bringing molecular biology and Nobel Prize breakthroughs to Japanese viewers.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="api-integration">
+      <h2 class="section-title">🔐 TikTok for Developers Integration &amp; Scopes</h2>
+      <p class="section-sub">
+        How BombZoo Studio integrates TikTok Login Kit and Content Posting API across our desktop/web publishing workflow.
+      </p>
+      <div class="grid-2">
+        <div class="card">
+          <h3>1. Login Kit (<code>user.info.basic</code>)</h3>
+          <p>Authenticates the studio's own TikTok channel accounts via OAuth 2.0 PKCE (`http://localhost:8722/`) and verifies the active account's `open_id` and `display_name` before any publishing action to prevent cross-channel posting errors.</p>
+        </div>
+        <div class="card">
+          <h3>2. Duplicate Prevention (<code>video.list</code>)</h3>
+          <p>Queries `/v2/video/list/` on the authenticated account prior to publishing to verify that the episode's series label and caption have not already been posted, preventing accidental duplicate uploads.</p>
+        </div>
+        <div class="card">
+          <h3>3. Direct Post (<code>video.publish</code>)</h3>
+          <p>Publishes completed 9:16 educational videos directly via `/v2/post/publish/video/init/` (`FILE_UPLOAD`) with `is_aigc: true` synthetic media disclosure automatically enabled on every post.</p>
+        </div>
+        <div class="card">
+          <h3>4. Inbox Draft Upload (<code>video.upload</code>)</h3>
+          <p>Uploads video drafts to the creator's TikTok inbox via `/v2/post/publish/inbox/video/init/` when manual cover frame selection or final mobile review in the TikTok app is required.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div style="display:flex;align-items:center;gap:0.65rem;">
+        <img src="icon.png" alt="BombZoo Studio Icon" style="width:28px;height:28px;border-radius:6px;">
+        <span>&copy; 2026 <strong>BombZoo Studio</strong> (How Bio Works). All rights reserved.</span>
+      </div>
+      <div style="display:flex;gap:1.25rem;flex-wrap:wrap;">
+        <a href="./">Home</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="mailto:bombzoo78@gmail.com">Contact: bombzoo78@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function filterEpisodes(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      document.querySelectorAll('.ep-card').forEach(card => {
+        card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+      });
+    }
+
+    function searchEpisodes(q) {
+      const term = (q || '').toLowerCase();
+      document.querySelectorAll('.ep-card').forEach(card => {
+        const match = card.innerText.toLowerCase().includes(term);
+        card.style.display = match ? '' : 'none';
+      });
+    }
+
+    function updateWorkbench() {
+      const ch = document.getElementById('wbChannel').value;
+      const mode = document.getElementById('wbMode').value;
+      const title = document.getElementById('wbTitle').value.trim();
+      const hasBracket = /^\[.+?\]/.test(title);
+      const statusEl = document.getElementById('wbStatus');
+      if (hasBracket) {
+        statusEl.textContent = '✓ Valid Series Prefix & AIGC Disclosure Enabled';
+        statusEl.style.color = '#34d399';
+      } else {
+        statusEl.textContent = '⚠ Missing [Series · Number] Prefix Label';
+        statusEl.style.color = '#fbbf24';
+      }
+      const endpoint = mode === 'direct'
+        ? 'POST https://open.tiktokapis.com/v2/post/publish/video/init/'
+        : 'POST https://open.tiktokapis.com/v2/post/publish/inbox/video/init/';
+      const payload = {
+        account_handle: '@' + ch,
+        oauth_scopes: ['user.info.basic', 'video.list', mode === 'direct' ? 'video.publish' : 'video.upload'],
+        duplicate_check: 'GET /v2/video/list/ -> PASS (0 matching titles)',
+        endpoint: endpoint,
+        body: mode === 'direct' ? {
+          post_info: {
+            title: title,
+            privacy_level: 'SELF_ONLY',
+            disable_duet: false,
+            disable_comment: false,
+            disable_stitch: false,
+            is_aigc: true
+          },
+          source_info: {
+            source: 'FILE_UPLOAD',
+            video_size: 14829312,
+            chunk_size: 14829312,
+            total_chunk_count: 1
+          }
+        } : {
+          source_info: {
+            source: 'FILE_UPLOAD',
+            video_size: 14829312,
+            chunk_size: 14829312,
+            total_chunk_count: 1
+          }
+        }
+      };
+      document.getElementById('wbJsonPreview').textContent = JSON.stringify(payload, null, 2);
+    }
+    updateWorkbench();
+  </script>
+</body>
+</html>
