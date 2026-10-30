@@ -882,7 +882,8 @@ input:checked + .slider:before { transform: translateX(20px); }
   </footer>
 
   <script>
-    const BRIDGE_BASE = 'http://localhost:8722';
+    const IS_LOCAL_SERVER = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+    const BRIDGE_BASE = IS_LOCAL_SERVER ? '' : 'http://localhost:8722';
     const TIKTOK_CLIENT_KEY = 'sbawqp8fj1mbhwnr7v';
     const TIKTOK_SCOPES = 'video.publish,video.upload,user.info.basic,video.list';
     const TIKTOK_REDIRECT_URI = 'http://localhost:8722/';
@@ -1100,26 +1101,26 @@ input:checked + .slider:before { transform: translateX(20px); }
     }
 
     async function startTikTokOAuth() {
-      // 1. If local desktop studio server is running, request PKCE URL from it
-      try {
-        const r = await fetch(BRIDGE_BASE + '/api/oauth_url', { mode: 'cors' });
-        if (r.ok) {
-          const j = await r.json();
-          if (j.auth_url) {
-            window.location.href = j.auth_url;
-            return;
+      if (IS_LOCAL_SERVER) {
+        try {
+          const r = await fetch('/api/oauth_url');
+          if (r.ok) {
+            const j = await r.json();
+            if (j.auth_url) {
+              window.location.href = j.auth_url;
+              return;
+            }
           }
-        }
-      } catch (e) {}
+        } catch (e) {}
+      }
 
-      // 2. If visited on a machine without the local server running, generate a genuine WebCrypto PKCE S256 URL
-      //    and redirect directly to TikTok's official OAuth 2.0 authorization endpoint (ZERO fake session fallback!)
       const array = new Uint8Array(32);
       window.crypto.getRandomValues(array);
       const verifier = Array.from(array, b => b.toString(16).padStart(2, '0')).join('');
       const digest = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier));
       const challenge = Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, '0')).join('');
-      const state = Array.from(window.crypto.getRandomValues(new Uint8Array(12)), b => b.toString(16).padStart(2, '0')).join('');
+      const nonce = Array.from(window.crypto.getRandomValues(new Uint8Array(8)), b => b.toString(16).padStart(2, '0')).join('');
+      const state = `${nonce}.${verifier}`;
 
       const params = new URLSearchParams({
         client_key: TIKTOK_CLIENT_KEY,
@@ -1367,15 +1368,17 @@ input:checked + .slider:before { transform: translateX(20px); }
 
     window.addEventListener('DOMContentLoaded', async () => {
       onMetadataChange();
-      try {
-        const r = await fetch(BRIDGE_BASE + '/api/session', { mode: 'cors' });
-        if (r.ok) {
-          const s = await r.json();
-          if (s.connected) {
-            applyCreatorSession(s);
+      if (IS_LOCAL_SERVER) {
+        try {
+          const r = await fetch('/api/session');
+          if (r.ok) {
+            const s = await r.json();
+            if (s.connected) {
+              applyCreatorSession(s);
+            }
           }
-        }
-      } catch (e) {}
+        } catch (e) {}
+      }
     });
   </script>
 </body>
