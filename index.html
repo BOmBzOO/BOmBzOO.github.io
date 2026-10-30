@@ -846,9 +846,12 @@ input:checked + .slider:before {
       connected: false,
       nickname: 'how.bio.works',
       displayName: 'How Bio Works',
-      maxDurationSec: 600,
+      maxDurationSec: 3600,
       canPost: true,
-      videoDurationSec: 18.5
+      videoDurationSec: 18.5,
+      commentDisabled: false,
+      duetDisabled: false,
+      stitchDisabled: false
     };
 
     const videoEl = document.getElementById('videoPreview');
@@ -861,7 +864,7 @@ input:checked + .slider:before {
 
     function updateDurationVerification() {
       const d = creatorState.videoDurationSec || 18.5;
-      const maxD = creatorState.maxDurationSec || 600;
+      const maxD = creatorState.maxDurationSec || 3600;
       const el = document.getElementById('videoDurationCheck');
       if (d <= maxD) {
         el.textContent = `${d}s <= ${maxD}s (max_video_post_duration_sec Verified ✓)`;
@@ -883,12 +886,19 @@ input:checked + .slider:before {
 
     function applyCreatorSession(data) {
       creatorState.connected = true;
-      creatorState.nickname = data.creator_nickname || data.display_name || 'how.bio.works';
-      creatorState.displayName = data.display_name || 'How Bio Works';
-      creatorState.maxDurationSec = data.max_video_post_duration_sec || 600;
+      creatorState.nickname = data.creator_username || data.creator_nickname || 'how.bio.works';
+      creatorState.displayName = data.creator_nickname || data.display_name || 'How Bio Works';
+      creatorState.maxDurationSec = data.max_video_post_duration_sec || 3600;
       creatorState.canPost = data.can_post !== false;
+      creatorState.commentDisabled = Boolean(data.comment_disabled);
+      creatorState.duetDisabled = Boolean(data.duet_disabled);
+      creatorState.stitchDisabled = Boolean(data.stitch_disabled);
 
-      document.getElementById('creatorAvatar').textContent = 'HBW';
+      if (data.creator_avatar_url) {
+        document.getElementById('creatorAvatar').innerHTML = `<img src="${data.creator_avatar_url}" alt="Creator Avatar">`;
+      } else {
+        document.getElementById('creatorAvatar').textContent = 'HBW';
+      }
       document.getElementById('creatorNameDisplay').textContent =
         `Connected Creator: @${creatorState.nickname} (${creatorState.displayName})`;
       document.getElementById('previewCreatorNickname').textContent = `@${creatorState.nickname}`;
@@ -905,6 +915,26 @@ input:checked + .slider:before {
       const maxBadge = document.getElementById('badgeMaxDuration');
       maxBadge.textContent = `Max Video Duration: ${creatorState.maxDurationSec}s`;
       maxBadge.className = 'badge-pill ok';
+
+      // Grey out and disable interactions returned as disabled by creator_info API
+      const chkComment = document.getElementById('chkAllowComment');
+      const lblComment = document.getElementById('lblAllowComment');
+      chkComment.disabled = creatorState.commentDisabled;
+      lblComment.classList.toggle('disabled', creatorState.commentDisabled);
+
+      const chkDuet = document.getElementById('chkAllowDuet');
+      const lblDuet = document.getElementById('lblAllowDuet');
+      chkDuet.disabled = creatorState.duetDisabled;
+      if (creatorState.duetDisabled) chkDuet.checked = false;
+      lblDuet.classList.toggle('disabled', creatorState.duetDisabled);
+      lblDuet.querySelector('span').textContent = creatorState.duetDisabled ? 'Allow Duet (Disabled in Creator Settings)' : 'Allow Duet';
+
+      const chkStitch = document.getElementById('chkAllowStitch');
+      const lblStitch = document.getElementById('lblAllowStitch');
+      chkStitch.disabled = creatorState.stitchDisabled;
+      if (creatorState.stitchDisabled) chkStitch.checked = false;
+      lblStitch.classList.toggle('disabled', creatorState.stitchDisabled);
+      lblStitch.querySelector('span').textContent = creatorState.stitchDisabled ? 'Allow Stitch (Disabled in Creator Settings)' : 'Allow Stitch';
 
       document.getElementById('btnHeaderLoginText').textContent = `@${creatorState.nickname} Connected ✓`;
       document.getElementById('btnBarLoginText').textContent = 'Connected ✓';
