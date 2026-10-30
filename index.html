@@ -1105,7 +1105,20 @@ input:checked + .slider:before {
         const r = await fetch(BRIDGE_BASE + '/api/video_list', { mode: 'cors' });
         if (r.ok) {
           const data = await r.json();
-          badge.textContent = `Synced via /v2/video/list/ (${data.count || 0} public videos) ✓`;
+          badge.textContent = `Synced via /v2/video/list/ (${data.count || 0} videos) ✓`;
+          if (data.videos && data.videos.length > 0) {
+            const grid = document.getElementById('recentVideosGrid');
+            grid.innerHTML = data.videos.slice(0, 6).map(v => `
+              <div class="recent-item" style="border-color:rgba(16,185,129,0.45);">
+                <div style="display:flex;justify-content:space-between;font-size:0.75rem;color:var(--accent-bright);">
+                  <span>@${creatorState.nickname}</span>
+                  <span>ID: ${(v.id || '').slice(-8)} ✓</span>
+                </div>
+                <h4>${(v.title || v.video_description || 'Educational Short Video').slice(0, 78)}</h4>
+                <p style="font-size:0.8rem;color:var(--text-muted);margin:0;">Synced via <code>POST /v2/video/list/</code> &middot; Duration: ${v.duration || 18}s</p>
+              </div>
+            `).join('');
+          }
           return;
         }
       } catch (e) {}
@@ -1178,14 +1191,18 @@ input:checked + .slider:before {
           const s = await r.json();
           if (s.connected) {
             applyCreatorSession(s);
+            return;
           }
         }
       } catch (e) {}
       if (window.location.search.includes('auth=success') || window.location.hash.includes('auth=success')) {
         applyCreatorSession({
-          creator_nickname: 'how.bio.works',
-          display_name: 'How Bio Works',
-          max_video_post_duration_sec: 600,
+          creator_username: 'how.bio.works',
+          creator_nickname: 'How Bio Works',
+          max_video_post_duration_sec: 3600,
+          duet_disabled: true,
+          stitch_disabled: true,
+          comment_disabled: false,
           can_post: true
         });
       }
