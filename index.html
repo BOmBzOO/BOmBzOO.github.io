@@ -1,29 +1,26 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>BombZoo Studio — Web Publishing Studio for Science &amp; Education Creators</title>
-  <meta name="description" content="Web publishing studio for science and education creators to preview, caption, and post short-form videos to TikTok.">
-  <link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=3">
-  <link rel="icon" type="image/x-icon" href="favicon.ico?v=3">
-  <link rel="shortcut icon" href="favicon.ico?v=3">
-  <link rel="apple-touch-icon" href="icon.png?v=3">
-  <link rel="stylesheet" href="style.css?v=3">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BombZoo Studio — Web &amp; Desktop Publishing Studio for Science &amp; Education Creators</title>
+  <meta name="description" content="Open publishing studio for independent science, medicine, and education creators to preview, caption, and publish short-form videos to TikTok via Login Kit and Content Posting API.">
+  <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png?v=4">
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=4">
+  <link rel="apple-touch-icon" href="/icon.png?v=4">
   <style>
 :root {
   --bg: #0f172a;
-  --bg-card: #1b2838;
-  --bg-elevated: #223447;
-  --bg-input: #0b1320;
-  --accent: #4ab3c6;
-  --accent-bright: #67d4e8;
-  --tiktok-pink: #fe2c55;
-  --tiktok-cyan: #25f4ee;
+  --bg-card: #1e293b;
+  --bg-elevated: #26354d;
   --text: #f1f5f9;
   --text-muted: #94a3b8;
-  --border: #2dd4bf44;
-  --border-subtle: #334155;
+  --accent: #38bdf8;
+  --accent-bright: #7dd3fc;
+  --border: #334155;
+  --border-subtle: #1e293b;
+  --tiktok-pink: #fe2c55;
+  --tiktok-cyan: #25f4ee;
   --success: #10b981;
   --warning: #f59e0b;
   --danger: #ef4444;
@@ -43,14 +40,14 @@ a:hover { text-decoration: underline; }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(15, 23, 42, 0.96);
+  background: rgba(15, 23, 42, 0.95);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border);
 }
 .header-inner {
-  max-width: 1240px;
+  max-width: 1220px;
   margin: 0 auto;
-  padding: 0.65rem 1.5rem;
+  padding: 0.7rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -72,11 +69,10 @@ a:hover { text-decoration: underline; }
   border-radius: 10px;
   border: 1.5px solid var(--accent);
   object-fit: cover;
-  display: block;
 }
 .brand-subtitle {
   display: block;
-  font-size: 0.74rem;
+  font-size: 0.75rem;
   color: var(--accent);
   font-weight: 500;
 }
@@ -90,7 +86,7 @@ a:hover { text-decoration: underline; }
   color: var(--text-muted);
   font-size: 0.9rem;
   font-weight: 500;
-  padding: 0.35rem 0.6rem;
+  padding: 0.35rem 0.65rem;
   border-radius: 6px;
 }
 .main-nav a:hover, .main-nav a.active {
@@ -103,11 +99,11 @@ a:hover { text-decoration: underline; }
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: #000;
-  color: #fff;
+  background: #000000;
+  color: #ffffff;
   border: 1.5px solid var(--tiktok-cyan);
-  box-shadow: 2px 2px 0 var(--tiktok-pink);
-  padding: 0.5rem 1.05rem;
+  box-shadow: 2px 2px 0px var(--tiktok-pink);
+  padding: 0.45rem 1rem;
   border-radius: 8px;
   font-weight: 700;
   font-size: 0.88rem;
@@ -117,25 +113,41 @@ a:hover { text-decoration: underline; }
 .btn-tiktok-login:hover {
   transform: translateY(-1px);
 }
+.btn-disconnect {
+  display: none;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(239, 68, 68, 0.14);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+.btn-disconnect:hover {
+  background: rgba(239, 68, 68, 0.25);
+}
 
 .container {
-  max-width: 1240px;
+  max-width: 1220px;
   margin: 0 auto;
-  padding: 1.4rem 1.5rem 3rem;
+  padding: 1.25rem 1.5rem 3rem;
 }
 
 /* Creator Info Bar */
 .creator-bar {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.85rem 1.25rem;
+  margin-bottom: 1.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
-  background: linear-gradient(90deg, #162436 0%, #1b2e44 100%);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 0.85rem 1.25rem;
-  margin-bottom: 1.25rem;
 }
 .creator-identity {
   display: flex;
@@ -146,14 +158,14 @@ a:hover { text-decoration: underline; }
   width: 44px;
   height: 44px;
   border-radius: 50%;
+  background: #1e293b;
   border: 2px solid var(--tiktok-cyan);
-  background: #0b1320;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
+  font-size: 0.95rem;
   color: var(--tiktok-cyan);
-  font-size: 1.1rem;
   overflow: hidden;
 }
 .creator-avatar img {
@@ -168,134 +180,179 @@ a:hover { text-decoration: underline; }
   flex-wrap: wrap;
 }
 .badge-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: 0.78rem;
-  font-weight: 600;
-  padding: 0.25rem 0.7rem;
+  font-size: 0.76rem;
+  padding: 0.25rem 0.65rem;
   border-radius: 999px;
-  background: var(--bg-input);
-  border: 1px solid var(--border-subtle);
-  color: var(--text);
+  font-weight: 600;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
 }
 .badge-pill.ok {
-  background: rgba(16, 185, 129, 0.15);
-  color: #34d399;
+  background: rgba(16, 185, 129, 0.14);
   border-color: rgba(16, 185, 129, 0.45);
+  color: #34d399;
 }
 .badge-pill.warn {
-  background: rgba(245, 158, 11, 0.16);
-  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.15);
   border-color: rgba(245, 158, 11, 0.45);
+  color: #fbbf24;
 }
 
-/* Main 2-column Studio Grid */
-.studio-grid {
+/* Studio Two-Column Layout */
+.studio-workspace {
   display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 1.4rem;
+  grid-template-columns: 350px 1fr;
+  gap: 1.35rem;
   align-items: start;
 }
-@media (max-width: 960px) {
-  .studio-grid { grid-template-columns: 1fr; }
+@media (max-width: 920px) {
+  .studio-workspace { grid-template-columns: 1fr; }
 }
 
-.studio-card {
+.studio-panel {
   background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--border);
   border-radius: 14px;
   padding: 1.25rem;
 }
-.studio-card h2 {
-  margin: 0 0 0.75rem;
-  font-size: 1.1rem;
+.panel-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+.panel-header h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
 }
 
+/* Video Preview Frame */
 .video-frame-wrap {
-  background: #050911;
-  border: 1px solid var(--border-subtle);
+  background: #000;
   border-radius: 12px;
+  border: 1.5px solid var(--border);
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   aspect-ratio: 9 / 16;
-  max-height: 450px;
-  margin: 0 auto 0.75rem;
+  max-height: 440px;
+  margin: 0 auto 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 .video-frame-wrap video {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  background: #000;
+  display: none;
 }
+.video-empty-placeholder {
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.84rem;
+}
+.file-picker-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 0.55rem 0.9rem;
+  border-radius: 8px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--accent);
+  color: var(--accent-bright);
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.file-picker-btn:hover {
+  background: rgba(56, 189, 248, 0.15);
+}
+.video-meta-box {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.65rem 0.8rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.video-meta-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+  gap: 0.5rem;
+}
+.video-meta-row:last-child { margin-bottom: 0; }
 
+/* Form Controls */
 .field-group {
   margin-bottom: 1rem;
 }
 .field-label {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  font-size: 0.86rem;
-  font-weight: 700;
-  color: var(--accent-bright);
-  margin-bottom: 0.35rem;
-}
-.field-sub {
-  font-size: 0.77rem;
-  color: var(--text-muted);
+  align-items: center;
+  font-weight: 600;
+  font-size: 0.88rem;
   margin-bottom: 0.4rem;
-}
-
-textarea.studio-input, select.studio-input, input[type="text"].studio-input {
-  width: 100%;
-  background: var(--bg-input);
   color: var(--text);
-  border: 1px solid var(--border-subtle);
+}
+.field-input, .field-select, .field-textarea {
+  width: 100%;
+  background: #0f172a;
+  color: var(--text);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 0.6rem 0.8rem;
-  font-family: inherit;
   font-size: 0.9rem;
+  font-family: inherit;
 }
-textarea.studio-input:focus, select.studio-input:focus {
+.field-textarea {
+  min-height: 68px;
+  resize: vertical;
+}
+.field-input:focus, .field-select:focus, .field-textarea:focus {
   outline: none;
   border-color: var(--accent);
 }
 
-/* Custom Privacy Selector + Native Select Sync */
+/* Privacy Option Buttons */
 .privacy-options-row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.55rem;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.6rem;
   margin-top: 0.45rem;
 }
-.priv-opt-btn {
-  position: relative;
-  background: var(--bg-input);
-  color: var(--text);
-  border: 1.5px solid var(--border-subtle);
+.privacy-opt-btn {
+  background: #0f172a;
+  border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 0.55rem 0.65rem;
-  font-size: 0.83rem;
+  padding: 0.5rem 0.65rem;
+  color: var(--text);
+  font-size: 0.82rem;
   font-weight: 600;
   cursor: pointer;
   text-align: center;
-  transition: all 0.15s ease;
+  transition: all 0.12s ease;
 }
-.priv-opt-btn.selected {
-  background: rgba(74, 179, 198, 0.2);
-  border-color: var(--accent-bright);
-  color: #fff;
+.privacy-opt-btn.selected {
+  border-color: var(--accent);
+  background: rgba(56, 189, 248, 0.14);
+  color: var(--accent-bright);
 }
-.priv-opt-btn.disabled-opt {
-  opacity: 0.42;
+.privacy-opt-btn.disabled-opt {
+  opacity: 0.45;
   cursor: not-allowed;
-  background: #131c2b;
-  border-color: #ef444466;
+  background: #111827;
 }
 
 /* Interaction Checkboxes */
@@ -303,23 +360,22 @@ textarea.studio-input:focus, select.studio-input:focus {
   display: flex;
   gap: 1.25rem;
   flex-wrap: wrap;
-  background: var(--bg-input);
-  border: 1px solid var(--border-subtle);
+  background: #0f172a;
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 0.65rem 0.9rem;
 }
 .check-item {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 0.45rem;
   font-size: 0.88rem;
-  font-weight: 600;
   cursor: pointer;
   user-select: none;
 }
 .check-item input[type="checkbox"] {
-  width: 17px;
-  height: 17px;
+  width: 16px;
+  height: 16px;
   accent-color: var(--accent);
   cursor: pointer;
 }
@@ -330,8 +386,8 @@ textarea.studio-input:focus, select.studio-input:focus {
 
 /* Commercial Content Toggle Section */
 .commercial-box {
-  background: #132032;
-  border: 1px solid var(--border-subtle);
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border);
   border-radius: 10px;
   padding: 0.85rem 1rem;
   margin-bottom: 1rem;
@@ -345,8 +401,8 @@ textarea.studio-input:focus, select.studio-input:focus {
 .switch {
   position: relative;
   display: inline-block;
-  width: 46px;
-  height: 25px;
+  width: 44px;
+  height: 24px;
   flex-shrink: 0;
 }
 .switch input { opacity: 0; width: 0; height: 0; }
@@ -356,173 +412,175 @@ textarea.studio-input:focus, select.studio-input:focus {
   inset: 0;
   background-color: #334155;
   transition: .2s;
-  border-radius: 999px;
+  border-radius: 24px;
 }
 .slider:before {
   position: absolute;
   content: "";
-  height: 19px;
-  width: 19px;
+  height: 18px;
+  width: 18px;
   left: 3px;
   bottom: 3px;
   background-color: white;
   transition: .2s;
   border-radius: 50%;
 }
-input:checked + .slider {
-  background-color: var(--accent);
-}
-input:checked + .slider:before {
-  transform: translateX(21px);
-}
+input:checked + .slider { background-color: var(--accent); }
+input:checked + .slider:before { transform: translateX(20px); }
 
 .commercial-subpanel {
-  margin-top: 0.75rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--border-subtle);
+  margin-top: 0.8rem;
+  padding-top: 0.8rem;
+  border-top: 1px dashed var(--border);
   display: none;
 }
-.commercial-subpanel.open {
-  display: block;
-}
+.commercial-subpanel.open { display: block; }
 .comm-option {
   display: flex;
   align-items: flex-start;
   gap: 0.55rem;
-  padding: 0.45rem 0;
+  margin-bottom: 0.55rem;
   cursor: pointer;
 }
 .comm-option input {
-  width: 17px;
-  height: 17px;
-  margin-top: 2px;
+  margin-top: 0.22rem;
+  width: 16px;
+  height: 16px;
   accent-color: var(--accent);
 }
 .comm-label-prompt {
-  margin-top: 0.55rem;
+  margin-top: 0.6rem;
   padding: 0.5rem 0.75rem;
   border-radius: 7px;
-  background: rgba(74, 179, 198, 0.16);
-  border: 1px solid var(--accent);
-  color: #e0f2fe;
-  font-size: 0.84rem;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: var(--accent-bright);
+  font-size: 0.83rem;
   font-weight: 600;
   display: none;
 }
 
-/* Visible Tooltip Banner for Reviewer Clarity */
+/* Tooltip / Validation Banner */
 .ux-tooltip-banner {
   margin-top: 0.45rem;
-  padding: 0.5rem 0.75rem;
+  padding: 0.45rem 0.75rem;
   border-radius: 7px;
-  background: rgba(245, 158, 11, 0.18);
-  border: 1px solid #f59e0b;
-  color: #fde68a;
-  font-size: 0.82rem;
+  font-size: 0.81rem;
   font-weight: 600;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  color: #fde68a;
   display: none;
 }
 
-/* Legal Declaration Box */
+/* Dynamic Legal Consent Declaration */
 .legal-consent-box {
-  background: var(--bg-input);
-  border: 1px solid var(--border-subtle);
+  background: #0f172a;
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 0.65rem 0.9rem;
-  font-size: 0.85rem;
-  color: var(--text);
+  font-size: 0.84rem;
+  color: var(--text-muted);
   margin-bottom: 0.9rem;
 }
 
 /* Action Buttons */
 .publish-btn-row {
-  position: relative;
   display: flex;
-  gap: 0.75rem;
+  gap: 0.8rem;
   flex-wrap: wrap;
+  position: relative;
 }
 .btn-publish {
   flex: 1;
-  min-width: 220px;
+  min-width: 210px;
   padding: 0.75rem 1.2rem;
   border-radius: 9px;
+  border: none;
   font-weight: 700;
   font-size: 0.95rem;
-  border: none;
   cursor: pointer;
-  background: linear-gradient(90deg, #fe2c55 0%, #e01e45 100%);
+  background: linear-gradient(135deg, #fe2c55, #e11d48);
   color: #fff;
-  transition: opacity 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 .btn-publish:disabled {
   background: #334155;
-  color: #94a3b8;
+  color: #64748b;
   cursor: not-allowed;
-  opacity: 0.65;
 }
 .btn-inbox {
-  padding: 0.75rem 1.1rem;
+  flex: 1;
+  min-width: 210px;
+  padding: 0.75rem 1.2rem;
   border-radius: 9px;
-  font-weight: 700;
-  font-size: 0.9rem;
   border: 1.5px solid var(--accent);
-  background: transparent;
+  background: rgba(56, 189, 248, 0.1);
   color: var(--accent-bright);
+  font-weight: 700;
+  font-size: 0.92rem;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 .btn-inbox:disabled {
   border-color: #334155;
+  background: #1e293b;
   color: #64748b;
   cursor: not-allowed;
 }
 
-/* Processing & Status Polling Box */
+/* Post-Publish Status & Polling Panel */
 .publish-status-panel {
-  margin-top: 1rem;
-  background: #091322;
-  border: 1px solid var(--accent);
+  margin-top: 0.95rem;
+  padding: 0.85rem 1rem;
   border-radius: 10px;
-  padding: 0.95rem 1.1rem;
+  background: #0b1120;
+  border: 1px solid var(--accent);
   display: none;
 }
-.publish-status-panel.active {
-  display: block;
-}
+.publish-status-panel.active { display: block; }
 
-/* Recent TikTok Posts (video.list) */
+/* My Recent TikTok Videos Section (video.list) */
 .section-card {
+  margin-top: 1.5rem;
   background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 1.35rem;
-  margin-top: 1.6rem;
+  padding: 1.25rem;
 }
 .recent-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1rem;
-  margin-top: 0.9rem;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 0.9rem;
+  margin-top: 0.85rem;
 }
 .recent-item {
-  background: var(--bg-input);
-  border: 1px solid var(--border-subtle);
+  background: #0f172a;
+  border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 0.9rem;
+  padding: 0.85rem;
 }
 .recent-item h4 {
-  margin: 0.35rem 0;
-  font-size: 0.92rem;
+  margin: 0.25rem 0 0.35rem;
+  font-size: 0.9rem;
 }
+
 .site-footer {
-  border-top: 1px solid var(--border-subtle);
-  margin-top: 3rem;
+  border-top: 1px solid var(--border);
+  margin-top: 2.5rem;
   padding: 1.5rem;
   background: #0b1120;
   color: var(--text-muted);
   font-size: 0.85rem;
 }
 .footer-inner {
-  max-width: 1240px;
+  max-width: 1220px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -536,10 +594,10 @@ input:checked + .slider:before {
   <header class="site-header">
     <div class="header-inner">
       <a href="./" class="brand">
-        <img src="icon.png?v=3" alt="BombZoo Studio Icon" class="brand-icon">
+        <img src="icon.png?v=4" alt="BombZoo Studio Icon" class="brand-icon">
         <div>
           BombZoo Studio
-          <span class="brand-subtitle">Web Publishing Studio for Science &amp; Education Creators</span>
+          <span class="brand-subtitle">Web &amp; Desktop Publishing Studio for Science &amp; Education Creators</span>
         </div>
       </a>
       <nav class="main-nav">
@@ -551,18 +609,25 @@ input:checked + .slider:before {
         <button type="button" class="btn-tiktok-login" id="btnHeaderLogin" onclick="startTikTokOAuth()">
           <span>🎵</span> <span id="btnHeaderLoginText">Continue with TikTok</span>
         </button>
+        <button type="button" class="btn-disconnect" id="btnHeaderDisconnect" onclick="disconnectTikTokSession()">
+          <span>Disconnect</span>
+        </button>
       </nav>
     </div>
   </header>
 
   <main class="container" id="studio">
-    <!-- 1. Connected TikTok Creator Bar (creator_info API) -->
+    <!-- 1. Connected TikTok Creator Account Bar (Queried from /v2/post/publish/creator_info/query/) -->
     <div class="creator-bar" id="creatorBar">
       <div class="creator-identity">
         <div class="creator-avatar" id="creatorAvatar">TT</div>
         <div>
-          <div style="font-size:0.76rem;color:var(--text-muted);font-weight:600;">TIKTOK CREATOR ACCOUNT (via Login Kit &amp; /v2/post/publish/creator_info/query/)</div>
-          <div style="font-size:1.05rem;font-weight:700;" id="creatorNameDisplay">Not signed in — Click "Continue with TikTok" to connect your account</div>
+          <div style="font-size:0.75rem;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:0.04em;">
+            TikTok Creator Account (via Login Kit &amp; /v2/post/publish/creator_info/query/)
+          </div>
+          <div style="font-size:1.02rem;font-weight:700;" id="creatorNameDisplay">
+            Not signed in — Click "Continue with TikTok" to authenticate via OAuth 2.0
+          </div>
         </div>
       </div>
       <div class="creator-badges">
@@ -571,85 +636,82 @@ input:checked + .slider:before {
         <button type="button" class="btn-tiktok-login" id="btnBarLogin" onclick="startTikTokOAuth()">
           <span>🔗</span> <span id="btnBarLoginText">Continue with TikTok</span>
         </button>
+        <button type="button" class="btn-disconnect" id="btnBarDisconnect" onclick="disconnectTikTokSession()">
+          <span>✕ Disconnect Account</span>
+        </button>
       </div>
     </div>
 
-    <!-- 2. Main 2-Column Post to TikTok Studio -->
-    <div class="studio-grid">
-      <!-- Left Column: Video Preview & Duration Verification -->
-      <div class="studio-card">
-        <h2>
-          <span>📹 1. Video Preview</span>
-          <span class="badge-pill ok" id="badgeNoWatermark">No Watermark ✓</span>
-        </h2>
+    <!-- 2. Main Post to TikTok Publishing Workspace -->
+    <div class="studio-workspace">
+      <!-- Left Column: 5-a. Video Preview & File Selector -->
+      <div class="studio-panel">
+        <div class="panel-header">
+          <h2>🎬 1. Video Preview</h2>
+          <span class="badge-pill" id="badgeFileReady">No File Selected</span>
+        </div>
+
         <div class="video-frame-wrap">
-          <video id="videoPreview" src="sample_episode.mp4" controls playsinline preload="metadata"></video>
-        </div>
-        <div class="field-group" style="margin-bottom:0.6rem;">
-          <label class="field-label" for="videoFileInput">Select 9:16 Video File (MP4/MOV/WebM)</label>
-          <input type="file" id="videoFileInput" accept="video/mp4,video/quicktime,video/webm" onchange="handleVideoFileSelect(this)" style="font-size:0.82rem;color:var(--text-muted);width:100%;">
-        </div>
-        <div style="background:var(--bg-input);border:1px solid var(--border-subtle);border-radius:8px;padding:0.6rem 0.75rem;font-size:0.8rem;">
-          <div style="display:flex;justify-content:space-between;margin-bottom:0.25rem;">
-            <span style="color:var(--text-muted);">Selected Video:</span>
-            <strong id="videoFileName">sample_episode.mp4</strong>
+          <video id="videoPreview" controls playsinline preload="metadata"></video>
+          <div class="video-empty-placeholder" id="videoEmptyPlaceholder">
+            <div style="font-size:1.6rem;margin-bottom:0.4rem;">🎞️</div>
+            <div>No video loaded</div>
+            <div style="font-size:0.76rem;margin-top:0.25rem;">Click "Choose Video File (.mp4 / .mov)" below to select a video from your computer.</div>
           </div>
-          <div style="display:flex;justify-content:space-between;margin-bottom:0.25rem;">
-            <span style="color:var(--text-muted);">Video Duration Check:</span>
-            <strong id="videoDurationCheck" style="color:#34d399;">18.5s &le; 600s (Verified ✓)</strong>
+        </div>
+
+        <div class="field-group" style="margin-bottom:0.75rem;">
+          <label class="file-picker-btn" for="videoFileInput" id="lblChooseVideoFile">
+            📂 Choose Video File (.mp4 / .mov / .webm)
+          </label>
+          <input type="file" id="videoFileInput" accept="video/mp4,video/quicktime,video/webm" style="display:none;" onchange="handleVideoFileSelect(this)">
+        </div>
+
+        <div class="video-meta-box">
+          <div class="video-meta-row">
+            <span>Selected Video:</span>
+            <strong id="videoFileName" style="color:var(--text);">None</strong>
           </div>
-          <div style="display:flex;justify-content:space-between;">
-            <span style="color:var(--text-muted);">Posting to Account:</span>
-            <strong id="previewCreatorNickname" style="color:var(--accent-bright);">@how.bio.works</strong>
+          <div class="video-meta-row">
+            <span>Duration Check:</span>
+            <strong id="videoDurationCheck" style="color:var(--text-muted);">Select a video file to verify</strong>
+          </div>
+          <div class="video-meta-row">
+            <span>Posting to Account:</span>
+            <strong id="previewCreatorNickname" style="color:var(--accent-bright);">Not signed in</strong>
           </div>
         </div>
       </div>
 
-      <!-- Right Column: Required TikTok Post Metadata & UX Controls -->
-      <div class="studio-card">
-        <h2>
-          <span>⚙️ 2. Post to TikTok Settings</span>
-          <span style="font-size:0.78rem;color:var(--text-muted);font-weight:500;">All fields controlled by Creator</span>
-        </h2>
-
-        <!-- 2-a. Editable Title / Caption -->
-        <div class="field-group">
-          <label class="field-label" for="postTitle">
-            <span>Title / Caption &amp; Hashtags *</span>
-            <span id="titleCharCount" style="font-weight:500;color:var(--text-muted);">112 / 2200</span>
-          </label>
-          <textarea id="postTitle" class="studio-input" rows="2" oninput="onMetadataChange()" placeholder="Write a title, caption, and hashtags for your TikTok video...">CAR-T Cell Therapy Explained: How Engineered Immune Cells Target Cancer [Brief Insight 1] #Biology #Medicine #Shorts</textarea>
+      <!-- Right Column: Required UX Implementation Fields -->
+      <div class="studio-panel">
+        <div class="panel-header">
+          <h2>⚙️ 2. Post to TikTok Settings</h2>
+          <span style="font-size:0.78rem;color:var(--text-muted);">All fields controlled by Creator</span>
         </div>
 
-        <!-- 2-b. Privacy Status (Mandatory: NO default value!) -->
+        <!-- 2-a. Title (Editable by User) -->
         <div class="field-group">
-          <label class="field-label" for="privacySelect">
+          <div class="field-label">
+            <span>Title / Caption &amp; Hashtags *</span>
+            <span id="titleCharCount" style="font-size:0.76rem;color:var(--text-muted);">0 / 2200</span>
+          </div>
+          <textarea class="field-textarea" id="postTitle" maxlength="2200" placeholder="Enter your video title, educational summary, and hashtags..." oninput="onMetadataChange()"></textarea>
+        </div>
+
+        <!-- 2-b. Privacy Status (Dynamically populated from creator_info.privacy_level_options; NO default value!) -->
+        <div class="field-group">
+          <div class="field-label">
             <span>Who can view this video (Privacy Status) *</span>
-            <span style="font-size:0.76rem;color:var(--warning);" id="privacyReqBadge">Required — Manual selection mandatory</span>
-          </label>
-          <select id="privacySelect" class="studio-input" onchange="onPrivacySelectChange(this.value)">
-            <option value="" selected disabled>-- Select privacy status (No default value) --</option>
-            <option value="PUBLIC_TO_EVERYONE" id="optPublic">Public (Everyone)</option>
-            <option value="MUTUAL_FOLLOW_FRIENDS" id="optFriends">Friends (Followers you follow back)</option>
-            <option value="SELF_ONLY" id="optPrivate">Private (Only me)</option>
+            <span id="privacyReqBadge" style="font-size:0.76rem;color:var(--warning);">Required — Manual selection mandatory</span>
+          </div>
+          <select class="field-select" id="privacySelect" onchange="onPrivacySelectChange(this.value)">
+            <option value="">-- Select privacy status (No default value) --</option>
           </select>
 
-          <!-- Interactive visual option pills for instant hover tooltip & clarity -->
-          <div class="privacy-options-row">
-            <button type="button" class="priv-opt-btn" id="btnPrivPublic" onclick="selectPrivacyOption('PUBLIC_TO_EVERYONE')">
-              🌐 Public (Everyone)
-            </button>
-            <button type="button" class="priv-opt-btn" id="btnPrivFriends" onclick="selectPrivacyOption('MUTUAL_FOLLOW_FRIENDS')">
-              👥 Friends
-            </button>
-            <button type="button" class="priv-opt-btn" id="btnPrivPrivate"
-              onclick="selectPrivacyOption('SELF_ONLY')"
-              onmouseenter="showPrivateLockTooltip(true)"
-              onmouseleave="showPrivateLockTooltip(false)">
-              🔒 Private (Only me)
-            </button>
-          </div>
-          <!-- Tooltip / Prompt when Branded Content disables Private (Only me) -->
+          <div class="privacy-options-row" id="privacyButtonsRow"></div>
+
+          <!-- Tooltip shown when Branded Content disables Private option -->
           <div class="ux-tooltip-banner" id="privateDisabledTooltip">
             ⚠️ Branded content visibility cannot be set to private.
           </div>
@@ -714,8 +776,8 @@ input:checked + .slider:before {
         <!-- AI-Generated Content Disclosure -->
         <div class="field-group" style="margin-bottom:0.85rem;">
           <label class="check-item" style="font-size:0.84rem;">
-            <input type="checkbox" id="chkAigc" checked onchange="onMetadataChange()">
-            <span>Disclose AI-generated content (<code>is_aigc: true</code> — labels realistic synthetic or AI-assisted media)</span>
+            <input type="checkbox" id="chkAigc" onchange="onMetadataChange()">
+            <span>Disclose AI-generated content (<code>is_aigc</code> — labels realistic synthetic or AI-assisted media)</span>
           </label>
         </div>
 
@@ -724,7 +786,7 @@ input:checked + .slider:before {
           By posting, you agree to TikTok's <a href="https://www.tiktok.com/legal/page/global/music-usage-confirmation/en" target="_blank" rel="noopener">Music Usage Confirmation</a>.
         </div>
 
-        <!-- Hover Tooltip Banner when Publish Button is Disabled -->
+        <!-- Hover Tooltip Banner when Publish Button is Disabled due to Commercial Disclosure -->
         <div class="ux-tooltip-banner" id="publishDisabledTooltip" style="margin-bottom:0.65rem;">
           ⚠️ You need to indicate if your content promotes yourself, a third party, or both.
         </div>
@@ -736,7 +798,7 @@ input:checked + .slider:before {
           <button type="button" class="btn-publish" id="btnPublishDirect" disabled onclick="submitToTikTok('direct')">
             🚀 Publish to TikTok (Direct Post)
           </button>
-          <button type="button" class="btn-inbox" id="btnUploadInbox" onclick="submitToTikTok('inbox')">
+          <button type="button" class="btn-inbox" id="btnUploadInbox" disabled onclick="submitToTikTok('inbox')">
             📥 Send Draft to TikTok Inbox (video.upload)
           </button>
         </div>
@@ -747,7 +809,7 @@ input:checked + .slider:before {
             ⏳ Notice: After publishing finishes, it may take a few minutes for the content to process and be visible on your TikTok profile.
           </div>
           <div style="font-size:0.84rem;color:var(--accent-bright);font-weight:600;margin-bottom:0.35rem;" id="pollingStatusText">
-            Status (/v2/post/publish/status/fetch/): Initializing...
+            Status (/v2/post/publish/status/fetch/): Ready
           </div>
           <pre id="apiResponseLog" style="background:#050911;padding:0.65rem;border-radius:7px;font-size:0.77rem;color:#a5f3fc;margin:0;white-space:pre-wrap;"></pre>
         </div>
@@ -764,60 +826,39 @@ input:checked + .slider:before {
           </p>
         </div>
         <div style="display:flex;align-items:center;gap:0.65rem;">
-          <span class="badge-pill ok" id="videoListSyncBadge">Synced via /v2/video/list/ ✓</span>
-          <button type="button" class="btn-inbox" style="padding:0.45rem 0.9rem;font-size:0.82rem;" onclick="refreshVideoList()">
+          <span class="badge-pill" id="videoListSyncBadge">Sign in to sync /v2/video/list/</span>
+          <button type="button" class="btn-inbox" id="btnRefreshVideos" disabled style="padding:0.45rem 0.9rem;font-size:0.82rem;min-width:auto;" onclick="refreshVideoList()">
             🔄 Refresh My TikTok Posts
           </button>
         </div>
       </div>
 
       <div class="recent-grid" id="recentVideosGrid">
-        <div class="recent-item">
-          <div style="display:flex;justify-content:space-between;font-size:0.75rem;color:var(--accent-bright);">
-            <span>@how.bio.works</span>
-            <span>PUBLISH_COMPLETE</span>
-          </div>
-          <h4>[Ig Nobel 2026 · 1] Why Mammals Can Breathe Through Their Intestines</h4>
-          <p style="font-size:0.8rem;color:var(--text-muted);margin:0;">Retrieved via <code>/v2/video/list/</code> &middot; 9:16 Educational Short</p>
-        </div>
-        <div class="recent-item">
-          <div style="display:flex;justify-content:space-between;font-size:0.75rem;color:var(--accent-bright);">
-            <span>@how.bio.works</span>
-            <span>PUBLISH_COMPLETE</span>
-          </div>
-          <h4>[Nobel 2026 · 1] Regulatory T Cells &amp; FOXP3 Immune Tolerance</h4>
-          <p style="font-size:0.8rem;color:var(--text-muted);margin:0;">Retrieved via <code>/v2/video/list/</code> &middot; 9:16 Educational Short</p>
-        </div>
-        <div class="recent-item">
-          <div style="display:flex;justify-content:space-between;font-size:0.75rem;color:var(--accent-bright);">
-            <span>@how.bio.works</span>
-            <span>PUBLISH_COMPLETE</span>
-          </div>
-          <h4>[Nobel Chemistry 2026 · 1] Metal-Organic Frameworks (MOFs) Water Harvesting</h4>
-          <p style="font-size:0.8rem;color:var(--text-muted);margin:0;">Retrieved via <code>/v2/video/list/</code> &middot; 9:16 Educational Short</p>
+        <div class="recent-item" style="grid-column: 1 / -1; text-align:center; color:var(--text-muted);">
+          Sign in with TikTok and click <strong>"Refresh My TikTok Posts"</strong> to query your published videos via <code>POST /v2/video/list/</code>.
         </div>
       </div>
     </section>
 
     <!-- 4. Sample Science & Education Templates -->
     <section class="section-card" id="catalog">
-      <h2 style="margin:0 0 0.3rem;font-size:1.15rem;">📚 Open Educational Episode Templates for Creators</h2>
+      <h2 style="margin:0 0 0.3rem;font-size:1.15rem;">📚 Open Educational Caption Templates for Creators</h2>
       <p style="margin:0 0 0.9rem;font-size:0.85rem;color:var(--text-muted);">
-        Click any template below to load its citation caption into the Post to TikTok Studio above.
+        Click any template below to populate a sample science citation caption into the Title / Caption editor above.
       </p>
       <div class="recent-grid">
-        <div class="recent-item" style="cursor:pointer;" onclick="loadTemplate('CAR-T Cell Therapy Explained: How Engineered Immune Cells Target Cancer [Brief Insight 1] #Biology #Medicine #Shorts')">
-          <span class="badge-pill ok">Immunology &middot; 18.5s</span>
+        <div class="recent-item" style="cursor:pointer;" onclick="loadTemplate('CAR-T Cell Therapy Explained: How Engineered Immune Cells Target Cancer #Biology #Immunology #Shorts')">
+          <span class="badge-pill ok">Immunology Template</span>
           <h4>CAR-T Cell Therapy: Engineered T-Cell Receptors</h4>
           <p style="font-size:0.8rem;color:var(--text-muted);margin:0;">Click to load caption into studio editor</p>
         </div>
-        <div class="recent-item" style="cursor:pointer;" onclick="loadTemplate('Oral PROTAC Degraders (Vepdegestrant): Turning Cells into Cancer Shredders [Paper 21] #Oncology #Science #Shorts')">
-          <span class="badge-pill ok">Oncology &middot; NEJM</span>
+        <div class="recent-item" style="cursor:pointer;" onclick="loadTemplate('Oral PROTAC Degraders: Targeted Protein Degradation via Ubiquitin Proteasome #Oncology #Science #Shorts')">
+          <span class="badge-pill ok">Oncology Template</span>
           <h4>PROTAC Protein Degraders &amp; Ubiquitin Proteasome</h4>
           <p style="font-size:0.8rem;color:var(--text-muted);margin:0;">Click to load caption into studio editor</p>
         </div>
-        <div class="recent-item" style="cursor:pointer;" onclick="loadTemplate('Stroke Penumbra Window: How Astrocytes Rewire Surviving Neurons [Paper 19] #Neuroscience #Brain #Shorts')">
-          <span class="badge-pill ok">Neuroscience &middot; Nature</span>
+        <div class="recent-item" style="cursor:pointer;" onclick="loadTemplate('Ischemic Stroke Penumbra: How Astrocytes Rewire Surviving Neurons #Neuroscience #Brain #Shorts')">
+          <span class="badge-pill ok">Neuroscience Template</span>
           <h4>Ischemic Penumbra &amp; Synaptic Rescue</h4>
           <p style="font-size:0.8rem;color:var(--text-muted);margin:0;">Click to load caption into studio editor</p>
         </div>
@@ -828,8 +869,8 @@ input:checked + .slider:before {
   <footer class="site-footer">
     <div class="footer-inner">
       <div style="display:flex;align-items:center;gap:0.65rem;">
-        <img src="icon.png?v=3" alt="BombZoo Studio Icon" style="width:28px;height:28px;border-radius:6px;">
-        <span>&copy; 2026 <strong>BombZoo Studio</strong> — Web Publishing Studio for Science &amp; Education Creators.</span>
+        <img src="icon.png?v=4" alt="BombZoo Studio Icon" style="width:28px;height:28px;border-radius:6px;">
+        <span>&copy; 2026 <strong>BombZoo Studio</strong> — Web &amp; Desktop Publishing Studio for Science &amp; Education Creators.</span>
       </div>
       <div style="display:flex;gap:1.25rem;flex-wrap:wrap;">
         <a href="./">Creator Studio</a>
@@ -842,13 +883,27 @@ input:checked + .slider:before {
 
   <script>
     const BRIDGE_BASE = 'http://localhost:8722';
+    const TIKTOK_CLIENT_KEY = 'sbawqp8fj1mbhwnr7v';
+    const TIKTOK_SCOPES = 'video.publish,video.upload,user.info.basic,video.list';
+    const TIKTOK_REDIRECT_URI = 'http://localhost:8722/';
+
+    const PRIVACY_LABELS = {
+      'PUBLIC_TO_EVERYONE': '🌐 Public (Everyone)',
+      'MUTUAL_FOLLOW_FRIENDS': '👥 Friends (Mutual Follow)',
+      'FOLLOWER_OF_CREATOR': '👤 Followers Only',
+      'SELF_ONLY': '🔒 Private (Only me)'
+    };
+
+    let selectedVideoFile = null;
     let creatorState = {
       connected: false,
-      nickname: 'how.bio.works',
-      displayName: 'How Bio Works',
-      maxDurationSec: 3600,
-      canPost: true,
-      videoDurationSec: 18.5,
+      csrfToken: '',
+      nickname: '',
+      displayName: '',
+      maxDurationSec: 0,
+      privacyOptions: [],
+      canPost: false,
+      videoDurationSec: 0,
       commentDisabled: false,
       duetDisabled: false,
       stitchDisabled: false
@@ -859,13 +914,24 @@ input:checked + .slider:before {
       if (videoEl.duration && !isNaN(videoEl.duration)) {
         creatorState.videoDurationSec = Math.round(videoEl.duration * 10) / 10;
         updateDurationVerification();
+        validateFormState();
       }
     });
 
     function updateDurationVerification() {
-      const d = creatorState.videoDurationSec || 18.5;
-      const maxD = creatorState.maxDurationSec || 3600;
       const el = document.getElementById('videoDurationCheck');
+      if (!selectedVideoFile || !creatorState.videoDurationSec) {
+        el.textContent = 'Select a video file to verify';
+        el.style.color = 'var(--text-muted)';
+        return;
+      }
+      if (!creatorState.connected || !creatorState.maxDurationSec) {
+        el.textContent = `${creatorState.videoDurationSec}s (Sign in with TikTok to verify max_video_post_duration_sec)`;
+        el.style.color = '#fbbf24';
+        return;
+      }
+      const d = creatorState.videoDurationSec;
+      const maxD = creatorState.maxDurationSec;
       if (d <= maxD) {
         el.textContent = `${d}s <= ${maxD}s (max_video_post_duration_sec Verified ✓)`;
         el.style.color = '#34d399';
@@ -877,19 +943,53 @@ input:checked + .slider:before {
 
     function handleVideoFileSelect(input) {
       if (input.files && input.files[0]) {
-        const file = input.files[0];
-        document.getElementById('videoFileName').textContent = file.name;
-        const url = URL.createObjectURL(file);
-        videoEl.src = url;
+        selectedVideoFile = input.files[0];
+        document.getElementById('videoFileName').textContent = `${selectedVideoFile.name} (${(selectedVideoFile.size / (1024 * 1024)).toFixed(2)} MB)`;
+        const badge = document.getElementById('badgeFileReady');
+        badge.textContent = 'Video File Ready ✓';
+        badge.className = 'badge-pill ok';
+        document.getElementById('videoEmptyPlaceholder').style.display = 'none';
+        videoEl.style.display = 'block';
+        videoEl.src = URL.createObjectURL(selectedVideoFile);
       }
+    }
+
+    function renderPrivacyOptions(options) {
+      const sel = document.getElementById('privacySelect');
+      const row = document.getElementById('privacyButtonsRow');
+      sel.innerHTML = '<option value="">-- Select privacy status (No default value) --</option>';
+      row.innerHTML = '';
+
+      options.forEach(opt => {
+        const label = PRIVACY_LABELS[opt] || opt;
+        const oEl = document.createElement('option');
+        oEl.value = opt;
+        oEl.id = `opt_${opt}`;
+        oEl.textContent = `${label} (${opt})`;
+        sel.appendChild(oEl);
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'privacy-opt-btn';
+        btn.id = `btnPriv_${opt}`;
+        btn.textContent = label;
+        btn.onclick = () => selectPrivacyOption(opt);
+        if (opt === 'SELF_ONLY') {
+          btn.onmouseenter = () => showPrivateLockTooltip(true);
+          btn.onmouseleave = () => showPrivateLockTooltip(false);
+        }
+        row.appendChild(btn);
+      });
     }
 
     function applyCreatorSession(data) {
       creatorState.connected = true;
-      creatorState.nickname = data.creator_username || data.creator_nickname || 'how.bio.works';
-      creatorState.displayName = data.creator_nickname || data.display_name || 'How Bio Works';
-      creatorState.maxDurationSec = data.max_video_post_duration_sec || 3600;
-      creatorState.canPost = data.can_post !== false;
+      creatorState.csrfToken = data.csrf_token || '';
+      creatorState.nickname = data.creator_username || '';
+      creatorState.displayName = data.creator_nickname || '';
+      creatorState.maxDurationSec = data.max_video_post_duration_sec || 0;
+      creatorState.privacyOptions = Array.isArray(data.privacy_level_options) ? data.privacy_level_options : [];
+      creatorState.canPost = Boolean(data.can_post);
       creatorState.commentDisabled = Boolean(data.comment_disabled);
       creatorState.duetDisabled = Boolean(data.duet_disabled);
       creatorState.stitchDisabled = Boolean(data.stitch_disabled);
@@ -897,7 +997,7 @@ input:checked + .slider:before {
       if (data.creator_avatar_url) {
         document.getElementById('creatorAvatar').innerHTML = `<img src="${data.creator_avatar_url}" alt="Creator Avatar">`;
       } else {
-        document.getElementById('creatorAvatar').textContent = 'HBW';
+        document.getElementById('creatorAvatar').textContent = (creatorState.displayName || 'TT').slice(0, 2).toUpperCase();
       }
       document.getElementById('creatorNameDisplay').textContent =
         `Connected Creator: @${creatorState.nickname} (${creatorState.displayName})`;
@@ -916,33 +1016,91 @@ input:checked + .slider:before {
       maxBadge.textContent = `Max Video Duration: ${creatorState.maxDurationSec}s`;
       maxBadge.className = 'badge-pill ok';
 
+      renderPrivacyOptions(creatorState.privacyOptions);
+
       // Grey out and disable interactions returned as disabled by creator_info API
       const chkComment = document.getElementById('chkAllowComment');
       const lblComment = document.getElementById('lblAllowComment');
       chkComment.disabled = creatorState.commentDisabled;
+      if (creatorState.commentDisabled) chkComment.checked = false;
       lblComment.classList.toggle('disabled', creatorState.commentDisabled);
+      lblComment.querySelector('span').textContent = creatorState.commentDisabled
+        ? 'Allow Comment (Disabled in Creator Settings)'
+        : 'Allow Comment';
 
       const chkDuet = document.getElementById('chkAllowDuet');
       const lblDuet = document.getElementById('lblAllowDuet');
       chkDuet.disabled = creatorState.duetDisabled;
       if (creatorState.duetDisabled) chkDuet.checked = false;
       lblDuet.classList.toggle('disabled', creatorState.duetDisabled);
-      lblDuet.querySelector('span').textContent = creatorState.duetDisabled ? 'Allow Duet (Disabled in Creator Settings)' : 'Allow Duet';
+      lblDuet.querySelector('span').textContent = creatorState.duetDisabled
+        ? 'Allow Duet (Disabled in Creator Settings)'
+        : 'Allow Duet';
 
       const chkStitch = document.getElementById('chkAllowStitch');
       const lblStitch = document.getElementById('lblAllowStitch');
       chkStitch.disabled = creatorState.stitchDisabled;
       if (creatorState.stitchDisabled) chkStitch.checked = false;
       lblStitch.classList.toggle('disabled', creatorState.stitchDisabled);
-      lblStitch.querySelector('span').textContent = creatorState.stitchDisabled ? 'Allow Stitch (Disabled in Creator Settings)' : 'Allow Stitch';
+      lblStitch.querySelector('span').textContent = creatorState.stitchDisabled
+        ? 'Allow Stitch (Disabled in Creator Settings)'
+        : 'Allow Stitch';
 
       document.getElementById('btnHeaderLoginText').textContent = `@${creatorState.nickname} Connected ✓`;
       document.getElementById('btnBarLoginText').textContent = 'Connected ✓';
+      document.getElementById('btnHeaderDisconnect').style.display = 'inline-flex';
+      document.getElementById('btnBarDisconnect').style.display = 'inline-flex';
+      document.getElementById('btnRefreshVideos').disabled = false;
+      document.getElementById('videoListSyncBadge').textContent = 'Ready to query /v2/video/list/';
+
+      updateDurationVerification();
+      validateFormState();
+    }
+
+    async function disconnectTikTokSession() {
+      try {
+        await fetch(BRIDGE_BASE + '/api/disconnect', {
+          method: 'POST',
+          headers: { 'X-Session-Token': creatorState.csrfToken },
+          mode: 'cors'
+        });
+      } catch (e) {}
+
+      creatorState = {
+        connected: false,
+        csrfToken: '',
+        nickname: '',
+        displayName: '',
+        maxDurationSec: 0,
+        privacyOptions: [],
+        canPost: false,
+        videoDurationSec: creatorState.videoDurationSec,
+        commentDisabled: false,
+        duetDisabled: false,
+        stitchDisabled: false
+      };
+
+      document.getElementById('creatorAvatar').textContent = 'TT';
+      document.getElementById('creatorNameDisplay').textContent =
+        'Not signed in — Click "Continue with TikTok" to authenticate via OAuth 2.0';
+      document.getElementById('previewCreatorNickname').textContent = 'Not signed in';
+      document.getElementById('badgePostStatus').textContent = 'Posting Status: Awaiting Login';
+      document.getElementById('badgePostStatus').className = 'badge-pill';
+      document.getElementById('badgeMaxDuration').textContent = 'Max Video Duration: -- sec';
+      document.getElementById('badgeMaxDuration').className = 'badge-pill';
+      document.getElementById('btnHeaderLoginText').textContent = 'Continue with TikTok';
+      document.getElementById('btnBarLoginText').textContent = 'Continue with TikTok';
+      document.getElementById('btnHeaderDisconnect').style.display = 'none';
+      document.getElementById('btnBarDisconnect').style.display = 'none';
+      document.getElementById('btnRefreshVideos').disabled = true;
+      document.getElementById('privacySelect').innerHTML = '<option value="">-- Select privacy status (No default value) --</option>';
+      document.getElementById('privacyButtonsRow').innerHTML = '';
       updateDurationVerification();
       validateFormState();
     }
 
     async function startTikTokOAuth() {
+      // 1. If local desktop studio server is running, request PKCE URL from it
       try {
         const r = await fetch(BRIDGE_BASE + '/api/oauth_url', { mode: 'cors' });
         if (r.ok) {
@@ -953,13 +1111,26 @@ input:checked + .slider:before {
           }
         }
       } catch (e) {}
-      // Fallback simulation if local bridge is not running
-      applyCreatorSession({
-        creator_nickname: 'how.bio.works',
-        display_name: 'How Bio Works',
-        max_video_post_duration_sec: 600,
-        can_post: true
+
+      // 2. If visited on a machine without the local server running, generate a genuine WebCrypto PKCE S256 URL
+      //    and redirect directly to TikTok's official OAuth 2.0 authorization endpoint (ZERO fake session fallback!)
+      const array = new Uint8Array(32);
+      window.crypto.getRandomValues(array);
+      const verifier = Array.from(array, b => b.toString(16).padStart(2, '0')).join('');
+      const digest = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier));
+      const challenge = Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, '0')).join('');
+      const state = Array.from(window.crypto.getRandomValues(new Uint8Array(12)), b => b.toString(16).padStart(2, '0')).join('');
+
+      const params = new URLSearchParams({
+        client_key: TIKTOK_CLIENT_KEY,
+        scope: TIKTOK_SCOPES,
+        response_type: 'code',
+        redirect_uri: TIKTOK_REDIRECT_URI,
+        state: state,
+        code_challenge: challenge,
+        code_challenge_method: 'S256'
       });
+      window.location.href = `https://www.tiktok.com/v2/auth/authorize/?${params.toString()}`;
     }
 
     function selectPrivacyOption(val) {
@@ -978,13 +1149,15 @@ input:checked + .slider:before {
       const branded = document.getElementById('chkCommercialToggle').checked &&
                       document.getElementById('chkBrandedContent').checked;
       if (val === 'SELF_ONLY' && branded) {
-        document.getElementById('privacySelect').value = 'PUBLIC_TO_EVERYONE';
-        val = 'PUBLIC_TO_EVERYONE';
+        const nonPrivate = creatorState.privacyOptions.find(o => o !== 'SELF_ONLY') || '';
+        document.getElementById('privacySelect').value = nonPrivate;
+        val = nonPrivate;
         showPrivateLockTooltip(true);
       }
-      document.getElementById('btnPrivPublic').classList.toggle('selected', val === 'PUBLIC_TO_EVERYONE');
-      document.getElementById('btnPrivFriends').classList.toggle('selected', val === 'MUTUAL_FOLLOW_FRIENDS');
-      document.getElementById('btnPrivPrivate').classList.toggle('selected', val === 'SELF_ONLY');
+      creatorState.privacyOptions.forEach(opt => {
+        const btn = document.getElementById(`btnPriv_${opt}`);
+        if (btn) btn.classList.toggle('selected', opt === val);
+      });
 
       const badge = document.getElementById('privacyReqBadge');
       if (val) {
@@ -1022,39 +1195,40 @@ input:checked + .slider:before {
 
       const promptEl = document.getElementById('commercialLabelPrompt');
       const legalEl = document.getElementById('legalConsentBox');
-      const optPrivate = document.getElementById('optPrivate');
-      const btnPrivPrivate = document.getElementById('btnPrivPrivate');
+      const optPrivate = document.getElementById('opt_SELF_ONLY');
+      const btnPrivPrivate = document.getElementById('btnPriv_SELF_ONLY');
       const privSelect = document.getElementById('privacySelect');
 
       if (!toggleOn) {
         promptEl.style.display = 'none';
-        optPrivate.disabled = false;
-        btnPrivPrivate.classList.remove('disabled-opt');
+        if (optPrivate) optPrivate.disabled = false;
+        if (btnPrivPrivate) btnPrivPrivate.classList.remove('disabled-opt');
         document.getElementById('privateDisabledTooltip').style.display = 'none';
         legalEl.innerHTML = `By posting, you agree to TikTok's <a href="https://www.tiktok.com/legal/page/global/music-usage-confirmation/en" target="_blank" rel="noopener">Music Usage Confirmation</a>.`;
       } else {
         if (yourBrand && !branded) {
           promptEl.style.display = 'block';
           promptEl.textContent = "🏷️ Your photo/video will be labeled as 'Promotional content'";
-          optPrivate.disabled = false;
-          btnPrivPrivate.classList.remove('disabled-opt');
+          if (optPrivate) optPrivate.disabled = false;
+          if (btnPrivPrivate) btnPrivPrivate.classList.remove('disabled-opt');
           document.getElementById('privateDisabledTooltip').style.display = 'none';
           legalEl.innerHTML = `By posting, you agree to TikTok's <a href="https://www.tiktok.com/legal/page/global/music-usage-confirmation/en" target="_blank" rel="noopener">Music Usage Confirmation</a>.`;
         } else if (branded) {
           promptEl.style.display = 'block';
           promptEl.textContent = "🏷️ Your photo/video will be labeled as 'Paid partnership'";
-          optPrivate.disabled = true;
-          btnPrivPrivate.classList.add('disabled-opt');
+          if (optPrivate) optPrivate.disabled = true;
+          if (btnPrivPrivate) btnPrivPrivate.classList.add('disabled-opt');
           if (privSelect.value === 'SELF_ONLY') {
-            privSelect.value = 'PUBLIC_TO_EVERYONE';
-            onPrivacySelectChange('PUBLIC_TO_EVERYONE');
+            const nonPrivate = creatorState.privacyOptions.find(o => o !== 'SELF_ONLY') || '';
+            privSelect.value = nonPrivate;
+            onPrivacySelectChange(nonPrivate);
             document.getElementById('privateDisabledTooltip').style.display = 'block';
           }
           legalEl.innerHTML = `By posting, you agree to TikTok's <a href="https://www.tiktok.com/legal/page/global/bc-policy/en" target="_blank" rel="noopener">Branded Content Policy</a> and <a href="https://www.tiktok.com/legal/page/global/music-usage-confirmation/en" target="_blank" rel="noopener">Music Usage Confirmation</a>.`;
         } else {
           promptEl.style.display = 'none';
-          optPrivate.disabled = false;
-          btnPrivPrivate.classList.remove('disabled-opt');
+          if (optPrivate) optPrivate.disabled = false;
+          if (btnPrivPrivate) btnPrivPrivate.classList.remove('disabled-opt');
           legalEl.innerHTML = `By posting, you agree to TikTok's <a href="https://www.tiktok.com/legal/page/global/music-usage-confirmation/en" target="_blank" rel="noopener">Music Usage Confirmation</a>.`;
         }
       }
@@ -1085,11 +1259,14 @@ input:checked + .slider:before {
       const yourBrand = document.getElementById('chkYourBrand').checked;
       const branded = document.getElementById('chkBrandedContent').checked;
       const commercialInvalid = toggleOn && !yourBrand && !branded;
-      const durationValid = (creatorState.videoDurationSec || 18.5) <= (creatorState.maxDurationSec || 600);
+      const hasFile = Boolean(selectedVideoFile && creatorState.videoDurationSec > 0);
+      const durationValid = hasFile && creatorState.maxDurationSec > 0 && creatorState.videoDurationSec <= creatorState.maxDurationSec;
 
-      const canPublish = Boolean(priv) && !commercialInvalid && durationValid && creatorState.canPost;
-      document.getElementById('btnPublishDirect').disabled = !canPublish;
-      document.getElementById('btnUploadInbox').disabled = commercialInvalid || !durationValid;
+      const canPublishDirect = creatorState.connected && creatorState.canPost && hasFile && durationValid && Boolean(priv) && !commercialInvalid;
+      const canUploadInbox = creatorState.connected && hasFile && durationValid && !commercialInvalid;
+
+      document.getElementById('btnPublishDirect').disabled = !canPublishDirect;
+      document.getElementById('btnUploadInbox').disabled = !canUploadInbox;
     }
 
     function loadTemplate(text) {
@@ -1099,35 +1276,46 @@ input:checked + .slider:before {
     }
 
     async function refreshVideoList() {
+      if (!creatorState.connected) return;
       const badge = document.getElementById('videoListSyncBadge');
       badge.textContent = 'Querying POST /v2/video/list/...';
       try {
-        const r = await fetch(BRIDGE_BASE + '/api/video_list', { mode: 'cors' });
-        if (r.ok) {
-          const data = await r.json();
-          badge.textContent = `Synced via /v2/video/list/ (${data.count || 0} videos) ✓`;
-          if (data.videos && data.videos.length > 0) {
-            const grid = document.getElementById('recentVideosGrid');
-            grid.innerHTML = data.videos.slice(0, 6).map(v => `
-              <div class="recent-item" style="border-color:rgba(16,185,129,0.45);">
-                <div style="display:flex;justify-content:space-between;font-size:0.75rem;color:var(--accent-bright);">
-                  <span>@${creatorState.nickname}</span>
-                  <span>ID: ${(v.id || '').slice(-8)} ✓</span>
-                </div>
-                <h4>${(v.title || v.video_description || 'Educational Short Video').slice(0, 78)}</h4>
-                <p style="font-size:0.8rem;color:var(--text-muted);margin:0;">Synced via <code>POST /v2/video/list/</code> &middot; Duration: ${v.duration || 18}s</p>
-              </div>
-            `).join('');
-          }
+        const r = await fetch(BRIDGE_BASE + '/api/video_list', {
+          headers: { 'X-Session-Token': creatorState.csrfToken },
+          mode: 'cors'
+        });
+        const data = await r.json();
+        if (!r.ok) {
+          badge.textContent = 'Error querying /v2/video/list/';
+          badge.className = 'badge-pill warn';
           return;
         }
-      } catch (e) {}
-      setTimeout(() => {
-        badge.textContent = 'Synced via /v2/video/list/ ✓';
-      }, 400);
+        badge.textContent = `Synced via /v2/video/list/ (${data.count || 0} videos) ✓`;
+        badge.className = 'badge-pill ok';
+        const grid = document.getElementById('recentVideosGrid');
+        if (data.videos && data.videos.length > 0) {
+          grid.innerHTML = data.videos.slice(0, 6).map(v => `
+            <div class="recent-item" style="border-color:rgba(16,185,129,0.45);">
+              <div style="display:flex;justify-content:space-between;font-size:0.75rem;color:var(--accent-bright);">
+                <span>@${creatorState.nickname}</span>
+                <span>ID: ${(v.id || '').slice(-8)} ✓</span>
+              </div>
+              <h4>${(v.title || v.video_description || 'TikTok Video').slice(0, 78)}</h4>
+              <p style="font-size:0.8rem;color:var(--text-muted);margin:0;">Synced via <code>POST /v2/video/list/</code> &middot; Duration: ${v.duration || 0}s</p>
+            </div>
+          `).join('');
+        } else {
+          grid.innerHTML = `<div class="recent-item" style="grid-column:1/-1;text-align:center;color:var(--text-muted);">No public videos returned by <code>/v2/video/list/</code> for @${creatorState.nickname}.</div>`;
+        }
+      } catch (e) {
+        badge.textContent = 'Local Studio Server Offline';
+        badge.className = 'badge-pill warn';
+      }
     }
 
     async function submitToTikTok(mode) {
+      if (!creatorState.connected || !selectedVideoFile) return;
+
       const panel = document.getElementById('publishStatusPanel');
       const statusText = document.getElementById('pollingStatusText');
       const logEl = document.getElementById('apiResponseLog');
@@ -1135,8 +1323,9 @@ input:checked + .slider:before {
 
       const payload = {
         mode: mode,
+        file_name: selectedVideoFile.name,
         title: document.getElementById('postTitle').value.trim(),
-        privacy_level: document.getElementById('privacySelect').value || 'SELF_ONLY',
+        privacy_level: document.getElementById('privacySelect').value,
         disable_comment: !document.getElementById('chkAllowComment').checked,
         disable_duet: !document.getElementById('chkAllowDuet').checked,
         disable_stitch: !document.getElementById('chkAllowStitch').checked,
@@ -1146,43 +1335,36 @@ input:checked + .slider:before {
       };
 
       statusText.textContent = mode === 'direct'
-        ? 'Calling POST /v2/post/publish/video/init/ (Direct Post — scope: video.publish)...'
-        : 'Calling POST /v2/post/publish/inbox/video/init/ (Inbox Draft — scope: video.upload)...';
-      logEl.textContent = JSON.stringify({ request_payload: payload }, null, 2);
+        ? `Uploading ${selectedVideoFile.name} via POST /v2/post/publish/video/init/ (scope: video.publish)...`
+        : `Uploading ${selectedVideoFile.name} via POST /v2/post/publish/inbox/video/init/ (scope: video.upload)...`;
+      logEl.textContent = JSON.stringify({ uploading_file: selectedVideoFile.name, bytes: selectedVideoFile.size, metadata: payload }, null, 2);
 
       try {
+        const metaB64 = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
         const r = await fetch(BRIDGE_BASE + '/api/publish', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
+          headers: {
+            'Content-Type': 'application/octet-stream',
+            'X-Session-Token': creatorState.csrfToken,
+            'X-Upload-Metadata': metaB64
+          },
+          body: selectedVideoFile,
           mode: 'cors'
         });
+        const res = await r.json();
         if (r.ok) {
-          const res = await r.json();
-          statusText.textContent = `Status (/v2/post/publish/status/fetch/): ${res.status || 'PUBLISH_COMPLETE'} ✓`;
+          statusText.textContent = `Status (/v2/post/publish/status/fetch/): ${res.status} ✓`;
           logEl.textContent = JSON.stringify(res, null, 2);
-          return;
+        } else {
+          statusText.textContent = `API Error (HTTP ${r.status})`;
+          logEl.textContent = JSON.stringify(res, null, 2);
         }
-      } catch (e) {}
-
-      // Fallback status progression
-      setTimeout(() => {
-        statusText.textContent = 'Polling POST /v2/post/publish/status/fetch/ -> Status: PROCESSING_UPLOAD...';
-      }, 700);
-      setTimeout(() => {
-        const finalStatus = mode === 'direct' ? 'PUBLISH_COMPLETE' : 'SEND_TO_USER_INBOX';
-        statusText.textContent = `Polling POST /v2/post/publish/status/fetch/ -> Status: ${finalStatus} ✓`;
-        logEl.textContent = JSON.stringify({
-          endpoint: mode === 'direct' ? '/v2/post/publish/video/init/' : '/v2/post/publish/inbox/video/init/',
-          status_check: '/v2/post/publish/status/fetch/',
-          status: finalStatus,
-          publish_id: 'v_pub_url~v2.7699421459005736981',
-          request_payload: payload
-        }, null, 2);
-      }, 1600);
+      } catch (e) {
+        statusText.textContent = 'Connection Error: Local Studio Server (localhost:8722) is not reachable.';
+        logEl.textContent = String(e);
+      }
     }
 
-    // Check URL hash/query for OAuth callback or bridge session on load
     window.addEventListener('DOMContentLoaded', async () => {
       onMetadataChange();
       try {
@@ -1191,21 +1373,9 @@ input:checked + .slider:before {
           const s = await r.json();
           if (s.connected) {
             applyCreatorSession(s);
-            return;
           }
         }
       } catch (e) {}
-      if (window.location.search.includes('auth=success') || window.location.hash.includes('auth=success')) {
-        applyCreatorSession({
-          creator_username: 'how.bio.works',
-          creator_nickname: 'How Bio Works',
-          max_video_post_duration_sec: 3600,
-          duet_disabled: true,
-          stitch_disabled: true,
-          comment_disabled: false,
-          can_post: true
-        });
-      }
     });
   </script>
 </body>
