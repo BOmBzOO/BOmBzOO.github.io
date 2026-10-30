@@ -985,6 +985,15 @@ input:checked + .slider:before { transform: translateX(20px); }
       });
     }
 
+    function escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
     function applyCreatorSession(data) {
       creatorState.connected = true;
       creatorState.csrfToken = data.csrf_token || '';
@@ -997,10 +1006,15 @@ input:checked + .slider:before { transform: translateX(20px); }
       creatorState.duetDisabled = Boolean(data.duet_disabled);
       creatorState.stitchDisabled = Boolean(data.stitch_disabled);
 
-      if (data.creator_avatar_url) {
-        document.getElementById('creatorAvatar').innerHTML = `<img src="${data.creator_avatar_url}" alt="Creator Avatar">`;
+      const avatarEl = document.getElementById('creatorAvatar');
+      avatarEl.innerHTML = '';
+      if (data.creator_avatar_url && /^https?:\/\//i.test(data.creator_avatar_url)) {
+        const img = document.createElement('img');
+        img.src = data.creator_avatar_url;
+        img.alt = 'Creator Avatar';
+        avatarEl.appendChild(img);
       } else {
-        document.getElementById('creatorAvatar').textContent = (creatorState.displayName || 'TT').slice(0, 2).toUpperCase();
+        avatarEl.textContent = (creatorState.displayName || 'TT').slice(0, 2).toUpperCase();
       }
       document.getElementById('creatorNameDisplay').textContent =
         `Connected Creator: @${creatorState.nickname} (${creatorState.displayName})`;
@@ -1008,7 +1022,7 @@ input:checked + .slider:before { transform: translateX(20px); }
 
       const stBadge = document.getElementById('badgePostStatus');
       if (creatorState.canPost) {
-        stBadge.textContent = 'Posting Quota: Available ✓';
+        stBadge.textContent = 'Posting Status: Ready ✓';
         stBadge.className = 'badge-pill ok';
       } else {
         stBadge.textContent = 'Posting Limit Reached — Try Again Later';
@@ -1062,12 +1076,19 @@ input:checked + .slider:before { transform: translateX(20px); }
 
     async function disconnectTikTokSession() {
       try {
-        await fetch(BRIDGE_BASE + '/api/disconnect', {
+        const r = await fetch(BRIDGE_BASE + '/api/disconnect', {
           method: 'POST',
           headers: { 'X-Session-Token': creatorState.csrfToken },
           mode: 'cors'
         });
-      } catch (e) {}
+        if (!r.ok) {
+          alert('Failed to revoke session token (HTTP ' + r.status + ').');
+          return;
+        }
+      } catch (e) {
+        alert('Local Studio Server is unreachable.');
+        return;
+      }
 
       creatorState = {
         connected: false,
@@ -1104,16 +1125,14 @@ input:checked + .slider:before { transform: translateX(20px); }
 
     async function startTikTokOAuth() {
       if (IS_LOCAL_SERVER) {
-        try {
-          const r = await fetch('/api/oauth_url');
-          if (r.ok) {
-            const j = await r.json();
-            if (j.auth_url) {
-              window.location.href = j.auth_url;
-              return;
-            }
+        const r = await fetch('/api/oauth_url');
+        if (r.ok) {
+          const j = await r.json();
+          if (j.auth_url) {
+            window.location.href = j.auth_url;
+            return;
           }
-        } catch (e) {}
+        }
       }
 
       const array = new Uint8Array(32);
@@ -1121,8 +1140,7 @@ input:checked + .slider:before { transform: translateX(20px); }
       const verifier = Array.from(array, b => b.toString(16).padStart(2, '0')).join('');
       const digest = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier));
       const challenge = Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, '0')).join('');
-      const nonce = Array.from(window.crypto.getRandomValues(new Uint8Array(8)), b => b.toString(16).padStart(2, '0')).join('');
-      const state = `${nonce}.${verifier}`;
+      const state = Array.from(window.crypto.getRandomValues(new Uint8Array(16)), b => b.toString(16).padStart(2, '0')).join('');
 
       const params = new URLSearchParams({
         client_key: TIKTOK_CLIENT_KEY,
@@ -1152,9 +1170,8 @@ input:checked + .slider:before { transform: translateX(20px); }
       const branded = document.getElementById('chkCommercialToggle').checked &&
                       document.getElementById('chkBrandedContent').checked;
       if (val === 'SELF_ONLY' && branded) {
-        const nonPrivate = creatorState.privacyOptions.find(o => o !== 'SELF_ONLY') || '';
-        document.getElementById('privacySelect').value = nonPrivate;
-        val = nonPrivate;
+        document.getElementById('privacySelect').value = '';
+        val = '';
         showPrivateLockTooltip(true);
       }
       creatorState.privacyOptions.forEach(opt => {
@@ -1222,9 +1239,8 @@ input:checked + .slider:before { transform: translateX(20px); }
           if (optPrivate) optPrivate.disabled = true;
           if (btnPrivPrivate) btnPrivPrivate.classList.add('disabled-opt');
           if (privSelect.value === 'SELF_ONLY') {
-            const nonPrivate = creatorState.privacyOptions.find(o => o !== 'SELF_ONLY') || '';
-            privSelect.value = nonPrivate;
-            onPrivacySelectChange(nonPrivate);
+            privSelect.value = '';
+            onPrivacySelectChange('');
             document.getElementById('privateDisabledTooltip').style.display = 'block';
           }
           legalEl.innerHTML = `By posting, you agree to TikTok's <a href="https://www.tiktok.com/legal/page/global/bc-policy/en" target="_blank" rel="noopener">Branded Content Policy</a> and <a href="https://www.tiktok.com/legal/page/global/music-usage-confirmation/en" target="_blank" rel="noopener">Music Usage Confirmation</a>.`;
@@ -1293,18 +1309,18 @@ input:checked + .slider:before { transform: translateX(20px); }
           badge.className = 'badge-pill warn';
           return;
         }
-        badge.textContent = `Synced via /v2/video/list/ (${data.count || 0} videos) ✓`;
+        badge.textContent = `Synced via /v2/video/list/ (${Number(data.count) || 0} videos) ✓`;
         badge.className = 'badge-pill ok';
         const grid = document.getElementById('recentVideosGrid');
         if (data.videos && data.videos.length > 0) {
           grid.innerHTML = data.videos.slice(0, 6).map(v => `
             <div class="recent-item" style="border-color:rgba(16,185,129,0.45);">
               <div style="display:flex;justify-content:space-between;font-size:0.75rem;color:var(--accent-bright);">
-                <span>@${creatorState.nickname}</span>
-                <span>ID: ${(v.id || '').slice(-8)} ✓</span>
+                <span>@${escapeHtml(creatorState.nickname)}</span>
+                <span>ID: ${escapeHtml((v.id || '').slice(-8))} ✓</span>
               </div>
-              <h4>${(v.title || v.video_description || 'TikTok Video').slice(0, 78)}</h4>
-              <p style="font-size:0.8rem;color:var(--text-muted);margin:0;">Synced via <code>POST /v2/video/list/</code> &middot; Duration: ${v.duration || 0}s</p>
+              <h4>${escapeHtml((v.title || v.video_description || 'TikTok Video').slice(0, 78))}</h4>
+              <p style="font-size:0.8rem;color:var(--text-muted);margin:0;">Synced via <code>POST /v2/video/list/</code> &middot; Duration: ${Number(v.duration) || 0}s</p>
             </div>
           `).join('');
         } else {
@@ -1312,12 +1328,9 @@ input:checked + .slider:before { transform: translateX(20px); }
             <div class="recent-item" style="grid-column:1/-1;border-color:rgba(16,185,129,0.45);">
               <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:#34d399;font-weight:700;">
                 <span>POST /v2/video/list/ — HTTP 200 OK (error.code: "ok") ✓</span>
-                <span>log_id: ${data.log_id || ''}</span>
+                <span>log_id: ${escapeHtml(data.log_id || '')}</span>
               </div>
-              <div style="font-size:0.83rem;color:var(--text);">
-                Connected creator <strong>@${creatorState.nickname}</strong> is in Private Account mode (required for Unaudited/Sandbox Direct Post testing), so <code>/v2/video/list/</code> returned <code>0</code> public videos.
-              </div>
-              <pre style="background:#050911;padding:0.55rem;border-radius:6px;font-size:0.75rem;color:#a5f3fc;margin:0.35rem 0 0;white-space:pre-wrap;">${JSON.stringify(data.raw_response || data, null, 2)}</pre>
+              <pre style="background:#050911;padding:0.55rem;border-radius:6px;font-size:0.75rem;color:#a5f3fc;margin:0.35rem 0 0;white-space:pre-wrap;">${escapeHtml(JSON.stringify(data.raw_response || data, null, 2))}</pre>
             </div>
           `;
         }
@@ -1338,6 +1351,7 @@ input:checked + .slider:before { transform: translateX(20px); }
       const payload = {
         mode: mode,
         file_name: selectedVideoFile.name,
+        mime_type: selectedVideoFile.type || 'video/mp4',
         title: document.getElementById('postTitle').value.trim(),
         privacy_level: document.getElementById('privacySelect').value,
         disable_comment: !document.getElementById('chkAllowComment').checked,
