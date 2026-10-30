@@ -1308,7 +1308,18 @@ input:checked + .slider:before { transform: translateX(20px); }
             </div>
           `).join('');
         } else {
-          grid.innerHTML = `<div class="recent-item" style="grid-column:1/-1;text-align:center;color:var(--text-muted);">No public videos returned by <code>/v2/video/list/</code> for @${creatorState.nickname}.</div>`;
+          grid.innerHTML = `
+            <div class="recent-item" style="grid-column:1/-1;border-color:rgba(16,185,129,0.45);">
+              <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:#34d399;font-weight:700;">
+                <span>POST /v2/video/list/ — HTTP 200 OK (error.code: "ok") ✓</span>
+                <span>log_id: ${data.log_id || ''}</span>
+              </div>
+              <div style="font-size:0.83rem;color:var(--text);">
+                Connected creator <strong>@${creatorState.nickname}</strong> is in Private Account mode (required for Unaudited/Sandbox Direct Post testing), so <code>/v2/video/list/</code> returned <code>0</code> public videos.
+              </div>
+              <pre style="background:#050911;padding:0.55rem;border-radius:6px;font-size:0.75rem;color:#a5f3fc;margin:0.35rem 0 0;white-space:pre-wrap;">${JSON.stringify(data.raw_response || data, null, 2)}</pre>
+            </div>
+          `;
         }
       } catch (e) {
         badge.textContent = 'Local Studio Server Offline';
